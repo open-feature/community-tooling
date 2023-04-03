@@ -29,8 +29,9 @@ const (
 )
 
 type options struct {
-	config string
-	output string
+	config   string
+	output   string
+	homepage string
 }
 type Group struct {
 	Repos       []string `json:"repos,omitempty"`
@@ -43,6 +44,7 @@ func main() {
 	o := options{}
 	flag.StringVar(&o.config, "config", "config", "")
 	flag.StringVar(&o.output, "output", "config/peribolos.yaml", "")
+	flag.StringVar(&o.homepage, "homepage", "", "")
 	flag.Parse()
 
 	cfg, err := loadOrgs(o)
@@ -138,6 +140,8 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 				maintainers.Repos[name] = github.Maintain
 				approvers.Repos[name] = github.Write
 				cfg.Repos[name] = applyRepoDefaults(cfg, name)
+
+				cfg.Repos[name] = enhanceUrl(cfg, name, o)
 			}
 
 			cfg.Teams[Admins] = admins
@@ -149,19 +153,19 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 	return config, nil
 }
 
+func enhanceUrl(cfg *org.Config, repoName string, o options) org.Repo {
+	repo := cfg.Repos[repoName]
+	if repo.HomePage == nil && o.homepage != "" {
+		homepage := o.homepage
+		repo.HomePage = &homepage
+	}
+	return repo
+}
 func applyRepoDefaults(cfg *org.Config, repoName string) org.Repo {
 	repo := cfg.Repos[repoName]
 	true := true
 	falsy := false
 
-	// if repo.DefaultBranch == nil {
-	// 	defaultBranch := "main"
-	// 	repo.DefaultBranch = &defaultBranch
-	// }
-	if repo.HomePage == nil {
-		homepage := "https://openfeature.dev"
-		repo.HomePage = &homepage
-	}
 	if repo.HasProjects == nil {
 		repo.HasProjects = &true
 	}
