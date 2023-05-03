@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/sirupsen/logrus v1.9.0
-	golang.org/x/exp v0.0.0-20230206171751-46f607a40771
+	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	k8s.io/test-infra v0.0.0-20230503163214-657dc72ba375
 )
 
