@@ -6,12 +6,13 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b
-	k8s.io/test-infra v0.0.0-20230801182840-d1098e7de750
+	k8s.io/test-infra v0.0.0-20240328141940-3a1c8b9eb113
 )
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/cjwagner/httpcache v0.0.0-20230907212505-d4841bbad466 // indirect
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
