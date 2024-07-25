@@ -13,14 +13,20 @@
   },
   "packageRules": [
     {
-      "description": "Automerge non-major updates",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "description": "Automerge minor updates if they are not 0.x releases",
+      "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     },
     {
-      "description": "Automerge github action updates of all types",
+      "description": "Automerge patch and digest updates",
+      "matchUpdateTypes": ["patch", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge github action updates of all types except releasing ones",
       "matchManagers": ["github-actions"],
+      "excludeDepNames": ["google-github-actions/release-please-action", "goreleaser/goreleaser-action"],
       "automerge": true
     },
     {
