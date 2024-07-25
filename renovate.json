@@ -24,8 +24,9 @@
       "automerge": true
     },
     {
-      "description": "Automerge github action updates of all types",
+      "description": "Automerge github action updates of all types except releasing ones",
       "matchManagers": ["github-actions"],
+      "excludeDepNames": ["google-github-actions/release-please-action", "goreleaser/goreleaser-action"],
       "automerge": true
     },
     {
