@@ -1,13 +1,13 @@
 module github.com/open-feature/community-tools
 
-go 1.22.0
+go 1.23.0
 
 toolchain go1.24.0
 
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/exp v0.0.0-20250210185358-939b2ce775ac
+	golang.org/x/exp v0.0.0-20250215185904-eff6e970281f
 	k8s.io/test-infra v0.0.0-20230801182840-d1098e7de750
 )
 
