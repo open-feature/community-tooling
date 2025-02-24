@@ -143,8 +143,8 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 				admins.Repos[name] = github.Admin
 				maintainers.Repos[name] = github.Maintain
 				approvers.Repos[name] = github.Write
-				tsc.Repos[name] = github.Write
-				gb.Repos[name] = github.Write
+				tsc.Repos[name] = github.Admin
+				gb.Repos[name] = github.Admin
 				cfg.Repos[name] = applyRepoDefaults(cfg, name)
 
 				cfg.Repos[name] = enhanceUrl(cfg, name, o)
