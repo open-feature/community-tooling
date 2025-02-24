@@ -26,6 +26,8 @@ const (
 	Admins      string = "admins"
 	Maintainers string = "maintainers"
 	Approvers   string = "approvers"
+	TSC   	    string = "technical-steering-committee"
+	GB	    string = "governance-board"
 )
 
 type options struct {
@@ -134,11 +136,15 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 			admins := getGlobalTeam(cfg, Admins)
 			maintainers := getGlobalTeam(cfg, Maintainers)
 			approvers := getGlobalTeam(cfg, Approvers)
+			tsc := getGlobalTeam(cfg, TSC)
+			gb := getGlobalTeam(cfg, GB)
 
 			for name := range cfg.Repos {
 				admins.Repos[name] = github.Admin
 				maintainers.Repos[name] = github.Maintain
 				approvers.Repos[name] = github.Write
+				tsc.Repos[name] = github.Admin
+				gb.Repos[name] = github.Admin
 				cfg.Repos[name] = applyRepoDefaults(cfg, name)
 
 				cfg.Repos[name] = enhanceUrl(cfg, name, o)
@@ -147,6 +153,8 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 			cfg.Teams[Admins] = admins
 			cfg.Teams[Maintainers] = maintainers
 			cfg.Teams[Approvers] = approvers
+			cfg.Teams[TSC] = tsc
+			cfg.Teams[GB] = gb
 			config[name] = *cfg
 		}
 	}
