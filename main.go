@@ -26,8 +26,8 @@ const (
 	Admins      string = "admins"
 	Maintainers string = "maintainers"
 	Approvers   string = "approvers"
-	TSC   	    string = "technical-steering-committee"
-	GB	    string = "governance-board"
+	TSC   	    string = "Technical Steering Committee"
+	GB	    string = "Governance board"
 )
 
 type options struct {
