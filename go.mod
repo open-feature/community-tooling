@@ -7,7 +7,7 @@ toolchain go1.24.3
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/exp v0.0.0-20250530174510-65e920069ea6
+	golang.org/x/exp v0.0.0-20250531010427-b6e5de432a8b
 	k8s.io/test-infra v0.0.0-20230801182840-d1098e7de750
 )
 
