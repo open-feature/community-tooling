@@ -8,7 +8,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476
-	k8s.io/test-infra v0.0.0-20230801182840-d1098e7de750
+	k8s.io/test-infra b8bfe9fce63f
 )
 
 require (
