@@ -21,10 +21,9 @@
   },
   "packageRules": [
     {
-      "description": "Automerge minor updates if they are not 0.x releases",
-      "matchUpdateTypes": ["minor"],
-      "matchCurrentVersion": "!/^0/",
-      "automerge": true
+      "description": "Catch-all",
+      "dependencyDashboardApproval": true,
+      "matchUpdateTypes": ["major", "minor", "patch"],
     },
     {
       "description": "Automerge patch and digest updates",
@@ -58,11 +57,6 @@
         "devDependencies"
       ],
       "automerge": true
-    },
-    {
-      "description": "Catch-all",
-      "dependencyDashboardApproval": true,
-      "matchUpdateTypes": [*],
     },
     {
       "description": "Automerge fixes for vulnerabilities",
