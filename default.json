@@ -5,25 +5,28 @@
     "helpers:pinGitHubActionDigests",
     ":semanticCommitTypeAll(chore)"
   ],
-  "prHourlyLimit": 0,
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
-  "dependencyDashboardApproval": true,
   "labels": [
     "renovate"
   ],
   "git-submodules": {
     "enabled": true
   },
+  "dependencyDashboardApproval": true,
   "vulnerabilityAlerts": {
     "enabled": true,
-    "groupName": "vulnerable-dependencies"
+    "groupName": "vulnerability-updates",
+    "dependencyDashboardApproval": false,
+    "semanticCommitType": "fix",
+    "commitMessageSuffix": "[SECURITY]"
   },
   "packageRules": [
     {
-      "description": "Catch-all",
-      "dependencyDashboardApproval": true,
-      "matchUpdateTypes": ["major", "minor", "patch"],
+      "description": "Automerge minor updates if they are not 0.x releases",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
     },
     {
       "description": "Automerge patch and digest updates",
@@ -57,16 +60,6 @@
         "devDependencies"
       ],
       "automerge": true
-    },
-    {
-      "description": "Automerge fixes for vulnerabilities",
-      "dependencyDashboardApproval": false,
-      "semanticCommitType": "fix",
-      "semanticCommitScope": "security",
-      "groupName": "vulnerable-dependencies",
-      "matchPackageNames": [
-        "*"
-      ]
-    },
+    }
   ]
 }
