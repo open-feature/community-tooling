@@ -3,7 +3,7 @@
   "extends": [
     "config:recommended",
     ":semanticCommitTypeAll(chore)",
-    "helpers:pinGitHubActionDigests",
+    "helpers:pinGitHubActionDigests"
   ],
   "ignorePresets": [":semanticPrefixFixDepsChoreOthers"]
   "semanticCommits": "enabled",
