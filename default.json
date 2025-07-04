@@ -60,11 +60,16 @@
       "automerge": true
     },
     {
+      "description": "Catch-all",
+      "dependencyDashboardApproval": true,
+      "matchUpdateTypes": [*],
+    },
+    {
       "description": "Automerge fixes for vulnerabilities",
       "dependencyDashboardApproval": false,
       "semanticCommitType": "fix",
       "semanticCommitScope": "security",
       "groupName": "vulnerable-dependencies"
-    }
+    },
   ]
 }
