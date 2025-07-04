@@ -5,6 +5,7 @@
     "helpers:pinGitHubActionDigests",
     ":semanticCommitTypeAll(chore)"
   ],
+  "prHourlyLimit": 0,
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "dependencyDashboardApproval": true,
