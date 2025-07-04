@@ -19,6 +19,7 @@
     "groupName": "vulnerability-updates",
     "dependencyDashboardApproval": false,
     "semanticCommitType": "fix",
+    "semanticCommitScope": "security",
     "commitMessageSuffix": "[SECURITY]"
   },
   "packageRules": [
