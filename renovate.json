@@ -1,7 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "helpers:pinGitHubActionDigests"
+    "config:recommended",
+    ":semanticCommitTypeAll(chore)",
+    "helpers:pinGitHubActionDigests",
   ],
   "ignorePresets": [":semanticPrefixFixDepsChoreOthers"]
   "semanticCommits": "enabled",
@@ -19,14 +21,13 @@
   "packageRules": [
     {
       "description": "Automerge fixes for vulnerabilities",
-      "semanticCommitType": "fix(security)",
+      "semanticCommitType": "security",
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "vulnerability-updates"
     },
     {
       "description": "Automerge minor updates if they are not 0.x releases",
       "dependencyDashboardApproval": true,
-      "semanticCommitType": "chore",
       "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
@@ -34,14 +35,12 @@
     {
       "description": "Automerge patch and digest updates",
       "dependencyDashboardApproval": true,
-      "semanticCommitType": "chore",
       "matchUpdateTypes": ["patch", "digest"],
       "automerge": true
     },
     {
       "description": "Automerge github action updates of all types except releasing ones",
       "dependencyDashboardApproval": true,
-      "semanticCommitType": "chore",
       "matchManagers": ["github-actions"],
       "excludeDepNames": [
         "google-github-actions/release-please-action",
@@ -52,13 +51,11 @@
     },
     {
       "description": "Automerge submodules",
-      "semanticCommitType": "chore",
       "matchManagers": ["git-submodules"],
       "automerge": true
     },
     {
       "description": "Automerge devdependency updates of all types",
-      "semanticCommitType": "chore",
       "dependencyDashboardApproval": true,
       "matchUpdateTypes": [
         "minor",
