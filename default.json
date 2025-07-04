@@ -17,7 +17,7 @@
   },
   "vulnerabilityAlerts": {
     "enabled": true,
-    "groupName": "vulnerability-updates"
+    "groupName": "vulnerable-dependencies"
   },
   "packageRules": [
     {
@@ -26,7 +26,7 @@
       "semanticCommitType": "fix",
       "semanticCommitScope": "security",
       "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "vulnerability-updates"
+      "groupName": "vulnerable-dependencies"
     },
     {
       "description": "Automerge minor updates if they are not 0.x releases",
