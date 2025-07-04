@@ -11,20 +11,32 @@
   "git-submodules": {
     "enabled": true
   },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "groupName": "vulnerability-updates"
+  },
   "packageRules": [
     {
+      "description": "Automerge fixes for vulnerabilities",
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "vulnerability-updates"
+    },
+    {
       "description": "Automerge minor updates if they are not 0.x releases",
+      "dependencyDashboardApproval": true,
       "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     },
     {
       "description": "Automerge patch and digest updates",
+      "dependencyDashboardApproval": true,
       "matchUpdateTypes": ["patch", "digest"],
       "automerge": true
     },
     {
       "description": "Automerge github action updates of all types except releasing ones",
+      "dependencyDashboardApproval": true,
       "matchManagers": ["github-actions"],
       "excludeDepNames": [
         "google-github-actions/release-please-action",
@@ -40,6 +52,7 @@
     },
     {
       "description": "Automerge devdependency updates of all types",
+      "dependencyDashboardApproval": true,
       "matchUpdateTypes": [
         "minor",
         "patch",
