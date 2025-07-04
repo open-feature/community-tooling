@@ -19,7 +19,7 @@
   "packageRules": [
     {
       "description": "Automerge fixes for vulnerabilities",
-      "semanticPrefix": "fix(security)",
+      "semanticCommitType": "fix(security)",
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "vulnerability-updates"
     },
