@@ -19,14 +19,6 @@
   },
   "packageRules": [
     {
-      "description": "Automerge fixes for vulnerabilities",
-      "dependencyDashboardApproval": false,
-      "semanticCommitType": "fix",
-      "semanticCommitScope": "security",
-      "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "vulnerability-updates"
-    },
-    {
       "description": "Automerge minor updates if they are not 0.x releases",
       "dependencyDashboardApproval": true,
       "matchUpdateTypes": ["minor"],
@@ -68,6 +60,14 @@
         "devDependencies"
       ],
       "automerge": true
+    },
+    {
+      "description": "Automerge fixes for vulnerabilities",
+      "dependencyDashboardApproval": false,
+      "semanticCommitType": "fix",
+      "semanticCommitScope": "security",
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "vulnerability-updates"
     }
   ]
 }
