@@ -20,6 +20,7 @@
   "packageRules": [
     {
       "description": "Automerge fixes for vulnerabilities",
+      "dependencyDashboardApproval": false,
       "semanticCommitType": "fix",
       "semanticCommitScope": "security",
       "matchUpdateTypes": ["patch", "minor"],
