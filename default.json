@@ -25,7 +25,6 @@
       "dependencyDashboardApproval": false,
       "semanticCommitType": "fix",
       "semanticCommitScope": "security",
-      "matchUpdateTypes": ["patch", "minor"],
       "groupName": "vulnerable-dependencies"
     },
     {
