@@ -5,7 +5,6 @@
     ":semanticCommitTypeAll(chore)",
     "helpers:pinGitHubActionDigests"
   ],
-  "ignorePresets": [":semanticPrefixFixDepsChoreOthers"]
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "labels": [
