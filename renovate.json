@@ -5,6 +5,7 @@
     "helpers:pinGitHubActionDigests"
   ],
   "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
   "labels": [
     "renovate"
   ],
@@ -18,6 +19,7 @@
   "packageRules": [
     {
       "description": "Automerge fixes for vulnerabilities",
+      "semanticPrefix": "fix(security)",
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "vulnerability-updates"
     },
