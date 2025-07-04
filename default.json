@@ -63,7 +63,10 @@
       "dependencyDashboardApproval": false,
       "semanticCommitType": "fix",
       "semanticCommitScope": "security",
-      "groupName": "vulnerable-dependencies"
+      "groupName": "vulnerable-dependencies",
+      "matchPackageNames": [
+        "*"
+      ]
     },
   ]
 }
