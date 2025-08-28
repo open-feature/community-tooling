@@ -1,0 +1,69 @@
+# org settings
+name: TEST-ORG
+description: testdata for testing the script
+
+default_repository_permission: read
+
+has_organization_projects: true
+has_repository_projects: true
+members_can_create_repositories: false
+
+admins:
+  - owner1
+  - owner2
+
+members:
+  - triager1
+  - approver1
+  - maintainer1
+  - admin1
+
+  - globaladmin1
+  - globalmaintainer1
+  - globalapprover1
+  - globaltriager1
+
+  - governor1
+  - tc1
+
+teams:
+  admins:
+    members:
+      - globaladmin1
+
+  maintainers:
+    members:
+      - globalmaintainer1
+
+  approvers:
+    members:
+      - globalapprover1
+  triagers:
+    members:
+      - globaltriager1
+
+  Technical Steering Committee:
+    members:
+      - tc1
+
+  Governance Board:
+    members:
+      - governor1
+
+repos:
+  # Template for adding a new project
+  # mandatory:
+  #
+  # <name>:
+  #   description: <description>
+  #
+  # optional:
+  #   archived: <true|false> - defaults to false
+  #   private: <true|false> - defaults to false
+  #   has_issues: <true|false> - defaults to true
+  #   has_projects: <true|false> - defaults to true
+  #   has_wiki: <true|false> - defaults to false
+  cli:
+    description: OpenFeature’s official command-line tool
+  org-repo1:
+  org-repo2:

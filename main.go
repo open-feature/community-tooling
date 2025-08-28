@@ -26,8 +26,9 @@ const (
 	Admins      string = "admins"
 	Maintainers string = "maintainers"
 	Approvers   string = "approvers"
-	TSC   	    string = "Technical Steering Committee"
-	GB	    string = "Governance Board"
+	Triagers    string = "triagers"
+	TSC         string = "Technical Steering Committee"
+	GB          string = "Governance Board"
 )
 
 type options struct {
@@ -40,6 +41,7 @@ type Group struct {
 	Admins      []string `json:"admins,omitempty"`
 	Maintainers []string `json:"maintainers,omitempty"`
 	Approvers   []string `json:"approvers,omitempty"`
+	Triagers    []string `json:"triagers,omitempty"`
 }
 
 func main() {
@@ -136,6 +138,7 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 			admins := getGlobalTeam(cfg, Admins)
 			maintainers := getGlobalTeam(cfg, Maintainers)
 			approvers := getGlobalTeam(cfg, Approvers)
+			triagers := getGlobalTeam(cfg, Triagers)
 			tsc := getGlobalTeam(cfg, TSC)
 			gb := getGlobalTeam(cfg, GB)
 
@@ -143,6 +146,7 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 				admins.Repos[name] = github.Admin
 				maintainers.Repos[name] = github.Maintain
 				approvers.Repos[name] = github.Write
+				triagers.Repos[name] = github.Triage
 				tsc.Repos[name] = github.Admin
 				gb.Repos[name] = github.Admin
 				cfg.Repos[name] = applyRepoDefaults(cfg, name)
@@ -153,6 +157,7 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 			cfg.Teams[Admins] = admins
 			cfg.Teams[Maintainers] = maintainers
 			cfg.Teams[Approvers] = approvers
+			cfg.Teams[Triagers] = triagers
 			cfg.Teams[TSC] = tsc
 			cfg.Teams[GB] = gb
 			config[name] = *cfg
@@ -215,39 +220,61 @@ func getGlobalTeam(cfg *org.Config, teamName string) org.Team {
 }
 
 func generateGroupConfig(path string) (map[string]org.Team, error) {
+	// Unmarshal the group configuration
 	groupCfg, err := unmarshalGroup(path)
 	if err != nil {
 		return nil, fmt.Errorf("error in %s: %v", path, err)
 	}
 
 	group := filepath.Base(filepath.Dir(path))
-	admins := org.Team{
-		Members: groupCfg.Admins,
-		Repos:   map[string]github.RepoPermissionLevel{},
-	}
-	maintainers := org.Team{
-		Members: groupCfg.Maintainers,
-		Repos:   map[string]github.RepoPermissionLevel{},
-		Children: map[string]org.Team{
-			group + "-" + Admins: admins,
-		},
-	}
-	approvers := org.Team{
-		Members: groupCfg.Approvers,
-		Repos:   map[string]github.RepoPermissionLevel{},
-		Children: map[string]org.Team{
-			group + "-" + Maintainers: maintainers,
-		},
+
+	// Define the hierarchy of teams
+	type TeamHierarchy struct {
+		Name     string
+		Role     github.RepoPermissionLevel
+		Members  []string
+		Children []string
 	}
 
-	// adding repos to the all repos list
-	for _, repo := range groupCfg.Repos {
-		admins.Repos[repo] = github.Admin
-		maintainers.Repos[repo] = github.Maintain
-		approvers.Repos[repo] = github.Write
+	hierarchy := []TeamHierarchy{
+		{Name: Admins, Role: github.Admin, Members: groupCfg.Admins},
+		{Name: Maintainers, Role: github.Maintain, Members: groupCfg.Maintainers, Children: []string{Admins}},
+		{Name: Approvers, Role: github.Write, Members: groupCfg.Approvers, Children: []string{Maintainers}},
+		{Name: Triagers, Role: github.Triage, Members: groupCfg.Triagers, Children: []string{Approvers}},
 	}
 
-	teams := map[string]org.Team{}
-	teams[group+"-"+Approvers] = approvers
-	return teams, nil
+	// Helper function to assign repository permissions
+	assignRepoPermissions := func(repos []string, permission github.RepoPermissionLevel) map[string]github.RepoPermissionLevel {
+		repoMap := make(map[string]github.RepoPermissionLevel)
+		for _, repo := range repos {
+			repoMap[repo] = permission
+		}
+		return repoMap
+	}
+
+	// Map to store all teams
+	teams := make(map[string]org.Team)
+
+	// Build teams based on the hierarchy
+	for _, entry := range hierarchy {
+		children := make(map[string]org.Team)
+		for _, childName := range entry.Children {
+			childKey := group + "-" + childName
+			if childTeam, exists := teams[childKey]; exists {
+				children[childKey] = childTeam
+			}
+		}
+
+		teamKey := group + "-" + entry.Name
+		teams[teamKey] = org.Team{
+			Members:  entry.Members,
+			Repos:    assignRepoPermissions(groupCfg.Repos, entry.Role),
+			Children: children,
+		}
+	}
+
+	// Return the top-level team (Triagers) as the root of the hierarchy
+	return map[string]org.Team{
+		group + "-" + Triagers: teams[group+"-"+Triagers],
+	}, nil
 }
