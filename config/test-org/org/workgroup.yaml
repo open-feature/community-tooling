@@ -1,0 +1,15 @@
+repos:
+  - org-repo1
+  - org-repo2
+
+triagers:
+  - triagers1
+
+approvers:
+  - approver1
+
+maintainers:
+  - maintainer1
+
+admins:
+  - admin1

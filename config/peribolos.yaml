@@ -1,0 +1,127 @@
+orgs:
+  test-org:
+    admins:
+    - owner1
+    - owner2
+    default_repository_permission: read
+    description: Standardizing Feature Flagging for Everyone
+    has_organization_projects: true
+    has_repository_projects: true
+    members:
+    - triager1
+    - approver1
+    - maintainer1
+    - admin1
+    - globaladmin1
+    - globalmaintainer1
+    - globalapprover1
+    - globaltriager1
+    - governor1
+    - tc1
+    members_can_create_repositories: false
+    name: OpenFeature
+    repos:
+      cli:
+        allow_merge_commit: false
+        allow_rebase_merge: false
+        allow_squash_merge: true
+        description: OpenFeature’s official command-line tool
+        has_projects: true
+        has_wiki: false
+      org-repo1:
+        allow_merge_commit: false
+        allow_rebase_merge: false
+        allow_squash_merge: true
+        has_projects: true
+        has_wiki: false
+      org-repo2:
+        allow_merge_commit: false
+        allow_rebase_merge: false
+        allow_squash_merge: true
+        has_projects: true
+        has_wiki: false
+    teams:
+      Governance Board:
+        members:
+        - governor1
+        repos:
+          cli: admin
+          org-repo1: admin
+          org-repo2: admin
+      Technical Steering Committee:
+        members:
+        - tc1
+        repos:
+          cli: admin
+          org-repo1: admin
+          org-repo2: admin
+      admins:
+        members:
+        - globaladmin1
+        repos:
+          cli: admin
+          org-repo1: admin
+          org-repo2: admin
+      approvers:
+        members:
+        - globalapprover1
+        repos:
+          cli: write
+          org-repo1: write
+          org-repo2: write
+      cli-triagers:
+        repos:
+          cli: triage
+        teams:
+          cli-approvers:
+            repos:
+              cli: write
+            teams:
+              cli-maintainers:
+                repos:
+                  cli: maintain
+                teams:
+                  cli-admins:
+                    repos:
+                      cli: admin
+      maintainers:
+        members:
+        - globalmaintainer1
+        repos:
+          cli: maintain
+          org-repo1: maintain
+          org-repo2: maintain
+      org-triagers:
+        members:
+        - triagers1
+        repos:
+          org-repo1: triage
+          org-repo2: triage
+        teams:
+          org-approvers:
+            members:
+            - approver1
+            repos:
+              org-repo1: write
+              org-repo2: write
+            teams:
+              org-maintainers:
+                members:
+                - maintainer1
+                repos:
+                  org-repo1: maintain
+                  org-repo2: maintain
+                teams:
+                  org-admins:
+                    members:
+                    - admin1
+                    repos:
+                      org-repo1: admin
+                      org-repo2: admin
+      triagers:
+        members:
+        - globaltriager1
+        repos:
+          cli: triage
+          org-repo1: triage
+          org-repo2: triage
