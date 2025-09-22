@@ -144,7 +144,7 @@ func loadOrgs(o options) (map[string]org.Config, error) {
 
 			for name := range cfg.Repos {
 				admins.Repos[name] = github.Admin
-				maintainers.Repos[name] = github.Maintain
+				maintainers.Repos[name] = github.Admin
 				approvers.Repos[name] = github.Write
 				triagers.Repos[name] = github.Triage
 				tsc.Repos[name] = github.Admin
