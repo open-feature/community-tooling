@@ -24,6 +24,18 @@
   },
   "packageRules": [
     {
+      "description": "Auto-create PRs for OpenFeature own artifacts",
+      "matchSourceUrls": ["https://github.com/open-feature/**"],
+      "dependencyDashboardApproval": false,
+      "packageRules": [
+        {
+          "description": "Schedule major updates for Fridays",
+          "matchUpdateTypes": ["major"],
+          "schedule": ["on friday"]
+        }
+      ]
+    },
+    {
       "description": "Automerge minor updates if they are not 0.x releases",
       "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
