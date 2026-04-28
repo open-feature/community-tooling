@@ -22,6 +22,7 @@
     "semanticCommitScope": "security",
     "commitMessageSuffix": "[SECURITY]"
   },
+  "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
     {
       "description": "Auto-create PRs for OpenFeature own artifacts",
