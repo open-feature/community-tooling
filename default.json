@@ -37,14 +37,22 @@
       ]
     },
     {
+      "dependencyDashboardCategory": "Major {{categories}} updates",
+      "matchUpdateTypes": ["major"]
+    },
+    {
       "description": "Automerge minor updates if they are not 0.x releases",
       "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
+      "dependencyDashboardCategory": "Minor {{categories}} updates",
+      "dependencyDashboardFooter": "These updates will auto-merge on ci passing.",
       "automerge": true
     },
     {
       "description": "Automerge patch and digest updates",
       "matchUpdateTypes": ["patch", "digest"],
+      "dependencyDashboardCategory": "Patch/digest updates",
+      "dependencyDashboardFooter": "These updates will auto-merge on ci passing.",
       "automerge": true
     },
     {
@@ -55,7 +63,19 @@
         "googleapis/release-please-action",
         "goreleaser/goreleaser-action"
       ],
+      "dependencyDashboardFooter": "These updates will auto-merge on ci passing.",
       "automerge": true
+    },
+    {
+      "description": "Show releasing github action updates in a dedicated category.",
+      "matchManagers": ["github-actions"],
+      "matchDepNames": [
+        "google-github-actions/release-please-action",
+        "googleapis/release-please-action",
+        "goreleaser/goreleaser-action"
+      ],
+      "dependencyDashboardCategory": "Releasing updates",
+      "dependencyDashboardFooter": ""
     },
     {
       "description": "Automerge submodules",
