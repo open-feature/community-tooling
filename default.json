@@ -58,9 +58,16 @@
       "automerge": false
     },
     {
-      "description": "Automerge submodules",
+      "description": "Update submodules, but never automerge them",
       "matchManagers": ["git-submodules"],
-      "automerge": true
+      "minimumReleaseAge": null,
+      "automerge": false
+    },
+    {
+      "description": "Registries that do not expose release timestamps cannot be aged",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/**", "gcr.io/**", "quay.io/**"],
+      "minimumReleaseAge": null
     },
     {
       "description": "Automerge devdependency updates of all types",
