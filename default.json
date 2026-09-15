@@ -71,7 +71,7 @@
         "googleapis/release-please-action",
         "goreleaser/goreleaser-action"
       ],
-      "dependencyDashboardCategory": "Releasing tool updates"
+      "dependencyDashboardCategory": "Release tool updates"
     },
     {
       "description": "Automerge submodules",
