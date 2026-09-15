@@ -13,7 +13,8 @@
   "git-submodules": {
     "enabled": true
   },
-  "dependencyDashboardApproval": true,
+  "dependencyDashboardApproval": false,
+  "minimumReleaseAge": "3 days",
   "vulnerabilityAlerts": {
     "enabled": true,
     "groupName": "vulnerability-updates",
@@ -37,14 +38,8 @@
       ]
     },
     {
-      "description": "Automerge minor updates if they are not 0.x releases",
-      "matchUpdateTypes": ["minor"],
-      "matchCurrentVersion": "!/^0/",
-      "automerge": true
-    },
-    {
-      "description": "Automerge patch and digest updates",
-      "matchUpdateTypes": ["patch", "digest"],
+      "description": "Automerge minor, patch, and digest updates",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true
     },
     {
