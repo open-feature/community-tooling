@@ -43,14 +43,19 @@
       "automerge": true
     },
     {
-      "description": "Automerge github action updates of all types except releasing ones",
+      "description": "Automerge github action updates of all types",
       "matchManagers": ["github-actions"],
-      "excludeDepNames": [
+      "automerge": true
+    },
+    {
+      "description": "Never automerge releasing action updates, even via the generic rules above",
+      "matchManagers": ["github-actions"],
+      "matchDepNames": [
         "google-github-actions/release-please-action",
         "googleapis/release-please-action",
         "goreleaser/goreleaser-action"
       ],
-      "automerge": true
+      "automerge": false
     },
     {
       "description": "Automerge submodules",
