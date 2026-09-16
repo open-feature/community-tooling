@@ -26,6 +26,11 @@
   "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
     {
+      "description": "Require dashboard approval for major updates",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
       "description": "Auto-create PRs for OpenFeature own artifacts",
       "matchSourceUrls": ["https://github.com/open-feature/**"],
       "dependencyDashboardApproval": false,
