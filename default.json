@@ -38,8 +38,8 @@
       ]
     },
     {
-      "description": "Automerge minor, patch, and digest updates",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "description": "Automerge minor and patch updates",
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     },
     {
