@@ -13,7 +13,8 @@
   "git-submodules": {
     "enabled": true
   },
-  "dependencyDashboardApproval": true,
+  "dependencyDashboardApproval": false,
+  "minimumReleaseAge": "3 days",
   "vulnerabilityAlerts": {
     "enabled": true,
     "groupName": "vulnerability-updates",
@@ -24,6 +25,11 @@
   },
   "postUpdateOptions": ["gomodTidy"],
   "packageRules": [
+    {
+      "description": "Require dashboard approval for major updates",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
     {
       "description": "Auto-create PRs for OpenFeature own artifacts",
       "matchSourceUrls": ["https://github.com/open-feature/**"],
@@ -37,30 +43,36 @@
       ]
     },
     {
-      "description": "Automerge minor updates if they are not 0.x releases",
-      "matchUpdateTypes": ["minor"],
-      "matchCurrentVersion": "!/^0/",
+      "description": "Automerge minor and patch updates",
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     },
     {
-      "description": "Automerge patch and digest updates",
-      "matchUpdateTypes": ["patch", "digest"],
-      "automerge": true
-    },
-    {
-      "description": "Automerge github action updates of all types except releasing ones",
+      "description": "Automerge github action updates of all types",
       "matchManagers": ["github-actions"],
-      "excludeDepNames": [
+      "automerge": true
+    },
+    {
+      "description": "Never automerge releasing action updates, even via the generic rules above",
+      "matchManagers": ["github-actions"],
+      "matchDepNames": [
         "google-github-actions/release-please-action",
         "googleapis/release-please-action",
         "goreleaser/goreleaser-action"
       ],
-      "automerge": true
+      "automerge": false
     },
     {
-      "description": "Automerge submodules",
+      "description": "Update submodules, but never automerge them",
       "matchManagers": ["git-submodules"],
-      "automerge": true
+      "minimumReleaseAge": null,
+      "automerge": false
+    },
+    {
+      "description": "Registries that do not expose release timestamps cannot be aged",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/**", "gcr.io/**", "quay.io/**"],
+      "minimumReleaseAge": null
     },
     {
       "description": "Automerge devdependency updates of all types",
