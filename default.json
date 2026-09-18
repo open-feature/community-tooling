@@ -87,6 +87,12 @@
       "dependencyDashboardApproval": false
     },
     {
+      "description": "Submodule pins whose version sits behind a prefix: release-please component tags such as json/json-schema-v0.2.15 and protobuf-v0.6.7, and version branches such as publish-wasm-evaluation-v1.47.1. The compatibility group keeps each prefix its own series, so one prefix is never offered as an upgrade to another. Requiring the prefix leaves bare vX.Y.Z pins on their native semver versioning.",
+      "matchManagers": ["git-submodules"],
+      "matchCurrentValue": "/^.+[-/]v\\d+\\.\\d+\\.\\d+$/",
+      "versioning": "regex:^(?<compatibility>.+[-/])v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
       "description": "Registries that do not expose release timestamps cannot be aged",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/**", "gcr.io/**", "quay.io/**"],
