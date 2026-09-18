@@ -63,10 +63,34 @@
       "automerge": false
     },
     {
-      "description": "Update submodules, but never automerge them",
+      "description": "Submodule updates cannot be aged: git-refs exposes no release timestamps",
       "matchManagers": ["git-submodules"],
-      "minimumReleaseAge": null,
-      "automerge": false
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Submodules track release tags; never chase upstream branch HEAD",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["digest"],
+      "enabled": false
+    },
+    {
+      "description": "Automerge submodule minor and patch updates",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Submodule major updates get a PR for review",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "dependencyDashboardApproval": false
+    },
+    {
+      "description": "Submodule pins whose version sits behind a prefix: release-please component tags such as json/json-schema-v0.2.15 and protobuf-v0.6.7, and version branches such as publish-wasm-evaluation-v1.47.1. The compatibility group keeps each prefix its own series, so one prefix is never offered as an upgrade to another. Requiring the prefix leaves bare vX.Y.Z pins on their native semver versioning.",
+      "matchManagers": ["git-submodules"],
+      "matchCurrentValue": "/^.+[-/]v\\d+\\.\\d+\\.\\d+$/",
+      "versioning": "regex:^(?<compatibility>.+[-/])v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
       "description": "Registries that do not expose release timestamps cannot be aged",
