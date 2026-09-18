@@ -86,6 +86,12 @@
         "devDependencies"
       ],
       "automerge": true
+    },
+    {
+      "description": "Never touch runtime versions configured via action inputs (java-version, node-version, etc.)",
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["uses-with"],
+      "enabled": false
     }
   ]
 }
