@@ -63,10 +63,28 @@
       "automerge": false
     },
     {
-      "description": "Update submodules, but never automerge them",
+      "description": "Submodule updates cannot be aged: git-refs exposes no release timestamps",
       "matchManagers": ["git-submodules"],
-      "minimumReleaseAge": null,
-      "automerge": false
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Submodules track release tags; never chase upstream branch HEAD",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["digest"],
+      "enabled": false
+    },
+    {
+      "description": "Automerge submodule minor and patch updates",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Submodule major updates get a PR for review",
+      "matchManagers": ["git-submodules"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "dependencyDashboardApproval": false
     },
     {
       "description": "Registries that do not expose release timestamps cannot be aged",
