@@ -28,6 +28,7 @@
     {
       "description": "Require dashboard approval for major updates",
       "matchUpdateTypes": ["major"],
+      "dependencyDashboardCategory": "Major {{categories}} updates",
       "dependencyDashboardApproval": true
     },
     {
@@ -45,6 +46,7 @@
     {
       "description": "Automerge minor and patch updates",
       "matchUpdateTypes": ["minor", "patch"],
+      "dependencyDashboardCategory": "{{updateType}} {{categories}} updates",
       "automerge": true
     },
     {
@@ -60,6 +62,7 @@
         "googleapis/release-please-action",
         "goreleaser/goreleaser-action"
       ],
+      "dependencyDashboardCategory": "Release tool updates",
       "automerge": false
     },
     {
