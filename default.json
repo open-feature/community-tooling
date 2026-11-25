@@ -116,6 +116,26 @@
       "matchManagers": ["github-actions"],
       "matchDepTypes": ["uses-with"],
       "enabled": false
-    }
+    },
+    {
+      "description": "Allow Go Alpine Docker image digest updates without release age restrictions",
+      "matchDatasources": ["docker"],
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": ["golang"],
+      "matchCurrentValue": "1.*-alpine",
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Allow official GitHub, Docker and Codecov actions digest updates without release age restrictions",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": [
+        "actions/**",
+        "codecov/codecov-action",
+        "docker/build-push-action"
+      ],
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "minimumReleaseAge": null
+     }
   ]
 }
